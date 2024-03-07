@@ -10,24 +10,22 @@ class HomePage(tk.Frame):
         self.config(bg='black')
 
         label_frame = Label_Fr(self)
-        label_frame.pack(side="top", fill=tk.X, ipady=30)
+        label_frame.pack(side="top", fill=tk.X, ipady=20)
 
         canvas_frame = Canvass(self)
-        canvas_frame.pack(side="left", fill="both", expand=True)
-
-        tk.Label(self, text="Home Page").pack()
-        tk.Button(self, text="Go to Page 1", command=self.go_to_page1).pack()
-        tk.Button(self, text="Go to Page 2", command=self.go_to_page2).pack()
-        tk.Button(self, text="Go to Page 3", command=self.go_to_page3).pack()
+        canvas_frame.pack(fill=tk.BOTH, expand=True, ipady=200)
 
     def go_to_page1(self):
-        from Page1 import Page1
-        self.master.switch_frame(Page1)
+        from PACE_M import pace_info
+        self.master.switch_frame(pace_info)
 
     def go_to_page2(self):
-        from Page2 import Page2
-        self.master.switch_frame(Page2)
+        from Falcon9 import Falcon_9
+        self.master.switch_frame(Falcon_9)
 
     def go_to_page3(self):
-        from Page3 import Page3
-        self.master.switch_frame(Page3)
+        from Falcon_heavy import Falcon_Heavy
+        self.master.switch_frame(Falcon_Heavy)
+
+    def go_to_home(self):
+        self.master.switch_frame(HomePage)

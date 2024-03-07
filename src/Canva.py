@@ -9,6 +9,7 @@ class Canvass(tk.Frame):
         super().__init__(master)
         self.master = master
 
+        self.frame = self
         self.delay = 15
         self.bg_color = '#000000'
         self.fg_color = '#FFFFFF'
@@ -93,7 +94,7 @@ class Canvass(tk.Frame):
 
         watch_button4.bind('<Enter>', lambda event: watch_button4.config(bg=self.button_hover_color, fg=self.bg_color))
         watch_button4.bind('<Leave>', lambda event: watch_button4.config(bg='#125C8F', fg=self.fg_color))
-        
+     
         watch_button5 = tk.Button(canvas, text='LEARN MORE',bd=0,padx=35,pady=15,bg='#262342', fg=self.fg_color, font=('Arial',11),
                                    command=lambda: self.on_watch_click('Starship-2 Test', self))
         canvas.create_window(110, 3660, anchor=tk.SW, window=watch_button5)
@@ -104,15 +105,13 @@ class Canvass(tk.Frame):
         # Bottom most frame and buttons
         canvas.create_text(self.screen_width//2-150, 3860, text="SpaceX © 2024", fill=self.fg_color, anchor=tk.SW)
         pp_button = tk.Button(canvas, text='PRIVACY POLICY', bd=0, bg=self.bg_color, fg=self.fg_color,
-                               command=lambda: self.last_but('priv_pol'))
+                               command=lambda: wb.open('https://www.spacex.com/media/privacy_policy_spacex.pdf'))
         canvas.create_window(self.screen_width//2-50, 3865, anchor=tk.SW, window=pp_button)
         sup_button = tk.Button(canvas, text='SUPPLIERS',bd=0,  bg=self.bg_color, fg=self.fg_color,
-                                command=lambda: self.last_but('supp'))
+                                command=lambda: wb.open('https://www.spacex.com/supplier/'))
         canvas.create_window(self.screen_width//2+60, 3865, anchor=tk.SW, window=sup_button)
         canvas.create_text(1300, 3860, text="@ SudhanshuD\tSelf", fill=self.fg_color, anchor=tk.SW)
 
-        # canvas.image5 = starship_vid1
-        # canvas.create_image(780, 140*24.98, image = starship_vid1)
         self.video_src = 'assets/images/starship_vid.mp4'
         self.video = cv2.VideoCapture(self.video_src)
 
@@ -120,11 +119,18 @@ class Canvass(tk.Frame):
 
         self.update()
 
-        # canvas.create_text(0, 3925, text='RECENT LAUNCH', fill=self.fg_color, font=('Mangal', 15), anchor=tk.SW)
-        # canvas.create_text(0, 3995, text='STARSHIP\'S', fill=self.fg_color, font=('Mangal', 35), anchor=tk.SW)
-        # canvas.create_text(0, 3945, text='SECOND FLIGHT', fill=self.fg_color, font=('Mangal', 35), anchor=tk.SW)
-        # canvas.create_text(0, 3995, text='TEST', fill=self.fg_color, font=('Mangal', 35), anchor=tk.SW)
+        canvas.update_idletasks()
+        canvas.config(scrollregion=canvas.bbox('all'))
+
+        # Set the maximum scroll region
+        canvas.bind('<Configure>', self.on_canvas_configure)
+
+    def on_canvas_configure(self, event):
+        canvas.configure(scrollregion=canvas.bbox('all'))
     
+    def on_mouse_wheel(self, event):
+        canvas.yview_scroll(-1 * (event.delta // 120), "units")
+
     def update(self):
         ret, frame = self.video.read()
         if ret:
@@ -141,14 +147,4 @@ class Canvass(tk.Frame):
         messagebox.showinfo('Watch', f'Will Redirect to watch {mission}!!!')
 
         if mission == 'PACE Launch':
-            from Page1 import pace_info
-            fr.destroy()
-            pace = pace_info(fr)
-            pace
-
-    def last_but(self, open):
-        if open == 'priv_pol':
-            wb.open('https://www.spacex.com/media/privacy_policy_spacex.pdf')
-        
-        elif open == 'supp':
-            wb.open('https://www.spacex.com/supplier/')
+            self.master.go_to_page1()

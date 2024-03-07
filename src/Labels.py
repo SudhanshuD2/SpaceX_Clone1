@@ -16,7 +16,7 @@ class Label_Fr(tk.Frame):
         fg_color = '#FFFFFF'
 
         try:
-            img = Image.open('assets/images/change2.png')
+            img = Image.open('assets/images/logo.png')
             image = img.resize((230, 30), Image.ANTIALIAS)
             photo = ImageTk.PhotoImage(image)
 
@@ -125,9 +125,10 @@ class Label_Fr(tk.Frame):
         messagebox.showinfo('Information', f'Sorry {optins} under construction site!!')
 
     def menu_calls(self, view):
-        messagebox.showinfo('Redirection', f'Getting Redirected to {view}!!!')
+        # messagebox.showinfo('Redirection', f'Getting Redirected to {view}!!!')
         if view == 'Falcon9':
-            pass
+            self.master.go_to_page2()
+
         elif view == 'Falcon_heavy':
             pass
         elif view == 'Dragon':
