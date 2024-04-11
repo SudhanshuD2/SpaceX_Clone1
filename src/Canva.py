@@ -146,5 +146,14 @@ class Canvass(tk.Frame):
     def on_watch_click(self, mission, fr):
         messagebox.showinfo('Watch', f'Will Redirect to watch {mission}!!!')
 
-        if mission == 'PACE Launch':
+        if mission == 'AX-3 Launch':
+            wb.open('https://twitter.com/i/broadcasts/1jMJgmndrAPKL')
+
+        elif mission == 'Starlink Launch':
+            wb.open('https://twitter.com/i/broadcasts/1yNGaZRVeLgJj')
+        
+        elif mission == 'NG-20 Launch':
+            wb.open('https://twitter.com/i/broadcasts/1yoKMwYaNPlJQ')
+        
+        elif mission == 'PACE Launch':
             self.master.go_to_page1()

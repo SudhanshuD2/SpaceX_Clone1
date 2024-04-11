@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+import webbrowser as wb
 
 
 class Label_Fr(tk.Frame):
@@ -27,49 +28,47 @@ class Label_Fr(tk.Frame):
             print('handling now')
 
         Falcon9 = tk.Button(self, text='FALCON 9',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                        command=lambda: self.menu_calls('Falcon9'))
+                        command=lambda: self.master.go_to_page2())
         Falcon9.grid(row=0, column=1, padx=10,pady=10, sticky='s')
         Falcon9.bind('<Enter>', lambda event: Falcon9.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Falcon9.bind('<Leave>', lambda event: Falcon9.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
         Falcon_heavy = tk.Button(self, text='FALCON HEAVY',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                                command=lambda: self.menu_calls('Falcon_heavy'))
+                                command=lambda: self.master.go_to_page3())
         Falcon_heavy.grid(row=0, column=2, padx=10,pady=10, sticky='s')
         Falcon_heavy.bind('<Enter>', lambda event: Falcon_heavy.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Falcon_heavy.bind('<Leave>', lambda event: Falcon_heavy.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
         Dragon = tk.Button(self, text='DRAGON',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                        command=lambda: self.menu_calls('Dragon'))
+                        command=lambda: self.master.go_to_page4())
         Dragon.grid(row=0, column=3, padx=9,pady=10, sticky='s')
         Dragon.bind('<Enter>', lambda event: Dragon.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Dragon.bind('<Leave>', lambda event: Dragon.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
         Starship = tk.Button(self, text='STARSHIP',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                            command=lambda: self.menu_calls('Starship'))
+                            command= lambda: self.master.go_to_page5())
         Starship.grid(row=0, column=4, padx=9,pady=10, sticky='s')
         Starship.bind('<Enter>', lambda event: Starship.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Starship.bind('<Leave>', lambda event: Starship.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
-        Human_SF = tk.Button(self, text='HUMAN SPACEFLIGHT',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                            command=lambda: self.menu_calls('Human_SpaceFlight'))
+        Human_SF = tk.Button(self, text='HUMAN SPACEFLIGHT',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'))
         Human_SF.grid(row=0, column=5, padx=9,pady=10, sticky='s')
         Human_SF.bind('<Enter>', lambda event: Human_SF.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Human_SF.bind('<Leave>', lambda event: Human_SF.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
         Rideshare = tk.Button(self, text='RIDESHARE',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                            command=lambda: self.menu_calls('Rideshare'))
+                              command= lambda: self.master.go_to_page7())
         Rideshare.grid(row=0, column=6, padx=9,pady=10, sticky='s')
         Rideshare.bind('<Enter>', lambda event: Rideshare.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Rideshare.bind('<Leave>', lambda event: Rideshare.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
-        Starshield = tk.Button(self, text='STARSHIELD',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                            command=lambda: self.menu_calls('Starshield'))
+        Starshield = tk.Button(self, text='STARSHIELD',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'))
         Starshield.grid(row=0, column=7, padx=9,pady=10, sticky='s')
         Starshield.bind('<Enter>', lambda event: Starshield.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Starshield.bind('<Leave>', lambda event: Starshield.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
 
-        Starlink = tk.Button(self, text='STARLINK',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold'),
-                            command=lambda: self.menu_calls('Starlink'))
+        Starlink = tk.Button(self, text='STARLINK',background=bg_color,bd=0, fg=fg_color, font=('Arial', 11, 'bold')
+                            , command=lambda: wb.open('https://www.starlink.com/'))
         Starlink.grid(row=0, column=8, padx=9,pady=10, sticky='s')
         Starlink.bind('<Enter>', lambda event: Starlink.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         Starlink.bind('<Leave>', lambda event: Starlink.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
@@ -78,7 +77,7 @@ class Label_Fr(tk.Frame):
         r1.grid(row=0, column=9, padx=50)
 
         shop = tk.Button(self, text='SHOP',border=0,background=bg_color,fg=fg_color,bd=0, font=('Arial', 11, 'bold'),
-                        command=lambda: self.menu_calls('Shop'))
+                        command=lambda: wb.open('https://shop.spacex.com/'))
         shop.grid(row=0, column=12, padx=5,pady=10, sticky='s')
         shop.bind('<Enter>', lambda event: shop.config(font=('Arial', 11, 'underline bold'), bg=bg_color))
         shop.bind('<Leave>', lambda event: shop.config(fg=fg_color, font=('Arial', 11, 'bold'), bg=bg_color))
@@ -123,25 +122,3 @@ class Label_Fr(tk.Frame):
         menu_posted.set(False)
         menu_b.config(text='≡')
         messagebox.showinfo('Information', f'Sorry {optins} under construction site!!')
-
-    def menu_calls(self, view):
-        # messagebox.showinfo('Redirection', f'Getting Redirected to {view}!!!')
-        if view == 'Falcon9':
-            self.master.go_to_page2()
-
-        elif view == 'Falcon_heavy':
-            pass
-        elif view == 'Dragon':
-            pass
-        elif view == 'Starship':
-            pass
-        elif view == 'Human_SpaceFlight':
-            pass
-        elif view == 'Rideshare':
-            pass
-        elif view == 'Starshield':
-            pass
-        elif view == 'Starlink':
-            pass
-        else:
-            pass

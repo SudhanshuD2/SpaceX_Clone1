@@ -34,7 +34,7 @@ class pace_info(tk.Frame):
         pace_p = ImageTk.PhotoImage(pace_img)
 
         back_button = tk.Button(canvas, text='<  BACK TO LAUNCHES',bd=0,padx=0,pady=0,bg=self.bg_color, fg=self.fg_color,
-                                font=('Arial',9),command=lambda: self.go_to_home())
+                                font=('Arial',9),command=lambda: self.master.switch_frame(HomePage))
         canvas.create_window(110, 20, anchor=tk.NW, window= back_button)
 
         back_button.bind('<Enter>', lambda event: back_button.config(text='<    BACK TO LAUNCHES'))
@@ -68,9 +68,26 @@ class pace_info(tk.Frame):
 
     def on_canvas_configure(self, event):
         canvas.configure(scrollregion=canvas.bbox('all'))
-
-    def go_to_home(self):
-        self.master.switch_frame(HomePage)
     
     def on_mouse_wheel(self, event):
         canvas.yview_scroll(-1 * (event.delta // 120), "units")
+    
+    def go_to_page2(self):
+        from Falcon9 import Falcon_9
+        self.master.switch_frame(Falcon_9)
+
+    def go_to_page3(self):
+        from Falcon_heavy import Falcon_Heavy
+        self.master.switch_frame(Falcon_Heavy)
+
+    def go_to_page4(self):
+        from Dragon import Dragon_page
+        self.master.switch_frame(Dragon_page)
+
+    def go_to_page5(self):
+        from Starship import Starship_page
+        self.master.switch_frame(Starship_page)
+
+    def go_to_page7(self):
+        from Rideshare import Rideshare_page
+        self.master.switch_frame(Rideshare_page)

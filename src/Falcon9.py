@@ -27,10 +27,10 @@ class Falcon_9(tk.Frame):
         canvas.configure(yscrollcommand=scrollbar.set)
         canvas.bind_all("<MouseWheel>", self.on_mouse_wheel)
         canvas.configure(scrollregion=canvas.bbox('all'))
-        canvas.pack(fill=tk.BOTH, expand=tk.YES, ipady=200)
+        canvas.pack(fill=tk.BOTH, expand=tk.YES, ipady=205)
 
         back_button = tk.Button(canvas, text='<',bd=0,padx=0,pady=0,bg=self.bg_color, fg=self.fg_color,
-                                font=('Arial',9, 'bold'),command=lambda: self.go_to_home())
+                                font=('Arial',9, 'bold'),command=lambda: self.master.switch_frame(HomePage))
         canvas.create_window(110, 20, anchor=tk.NW, window= back_button)
 
         fal_9_img = Image.open('assets/images/f9_main1.jpg')
@@ -139,29 +139,29 @@ class Falcon_9(tk.Frame):
                                  font=('Arial', 18, 'bold'), command=lambda: self.swipe('right'))
         canvas.create_window(self.screen_width-130, 3700, anchor=tk.NW, window= right_button)
 
-        canvas.create_text(self.screen_width/2-100, 3800, text='For information about our launch services, contact', fill='grey', font=("Bahnschrift", 12))
-        canvas.create_text(self.screen_width/2+165, 3800, text='sales@spacex.com', fill=self.fg_color, font=("Bahnschrift", 12))
+        canvas.create_text(self.screen_width/2-100, 4200, text='For information about our launch services, contact', fill='grey', font=("Bahnschrift", 12))
+        canvas.create_text(self.screen_width/2+165, 4200, text='sales@spacex.com', fill=self.fg_color, font=("Bahnschrift", 12))
         
         usr_gd = tk.Button(self, text='DOWNLOAD USER\'S GUIDS', bd=0, padx=5, pady=10, bg=self.bg_color, fg=self.fg_color,
                                 font=('Arial',11, 'bold'), command= lambda: wb.open('https://www.spacex.com/media/falcon-users-guide-2021-09.pdf'))
-        canvas.create_window(self.screen_width/2-270, 3820, anchor=tk.NW, window= usr_gd)
+        canvas.create_window(self.screen_width/2-270, 4250, anchor=tk.NW, window= usr_gd)
         usr_gd.bind('<Enter>', lambda event: usr_gd.config(bg=self.fg_color, fg=self.bg_color))
         usr_gd.bind('<Leave>', lambda event: usr_gd.config(bg=self.bg_color, fg=self.fg_color))
         srvcs = tk.Button(self, text='CAPABILITIES AND SERVICES', bd=0, padx=5, pady=10, bg=self.bg_color, fg=self.fg_color,
                                 font=('Arial', 11, 'bold'), command= lambda: wb.open('https://www.spacex.com/media/Capabilities&Services.pdf'))
-        canvas.create_window(self.screen_width/2, 3820, anchor=tk.NW, window= srvcs)
+        canvas.create_window(self.screen_width/2, 4250, anchor=tk.NW, window= srvcs)
         srvcs.bind('<Enter>', lambda event: srvcs.config(bg=self.fg_color, fg=self.bg_color))
         srvcs.bind('<Leave>', lambda event: srvcs.config(bg=self.bg_color, fg=self.fg_color))
 
         # Bottom most frame and buttons
-        canvas.create_text(self.screen_width//2-150, 3920, text="SpaceX © 2024", fill=self.fg_color, anchor=tk.SW)
+        canvas.create_text(self.screen_width//2-150, 4350, text="SpaceX © 2024", fill=self.fg_color, anchor=tk.SW)
         pp_button = tk.Button(canvas, text='PRIVACY POLICY', bd=0, bg=self.bg_color, fg=self.fg_color,
                                command=lambda: wb.open('https://www.spacex.com/media/privacy_policy_spacex.pdf'))
-        canvas.create_window(self.screen_width//2-50, 3925, anchor=tk.SW, window=pp_button)
+        canvas.create_window(self.screen_width//2-50, 4355, anchor=tk.SW, window=pp_button)
         sup_button = tk.Button(canvas, text='SUPPLIERS',bd=0,  bg=self.bg_color, fg=self.fg_color,
                                 command=lambda: wb.open('https://www.spacex.com/supplier/'))
-        canvas.create_window(self.screen_width//2+60, 3925, anchor=tk.SW, window=sup_button)
-        canvas.create_text(1300, 3915, text="@ SudhanshuD\tSelf", fill=self.fg_color, anchor=tk.SW)
+        canvas.create_window(self.screen_width//2+60, 4355, anchor=tk.SW, window=sup_button)
+        canvas.create_text(1300, 4345, text="@ SudhanshuD\tSelf", fill=self.fg_color, anchor=tk.SW)
 
         # Write any code above
         canvas.update_idletasks()
@@ -179,18 +179,35 @@ class Falcon_9(tk.Frame):
         if dirn == 'left':
             self.current_image_index = (self.current_image_index - 1) % len(self.images)
             self.disp_imgs()
-            # canvas.delete(f'{self.descs[self.current_image_index]}')
+            # canvas.delete('text')
 
         else:
             self.current_image_index = (self.current_image_index + 1) % len(self.images)
             self.disp_imgs()
-            # canvas.delete(f'{self.descs[self.current_image_index]}')
-
-    def go_to_home(self):
-        self.master.switch_frame(HomePage)
+            # canvas.delete('text')
 
     def on_mouse_wheel(self, event):
         canvas.yview_scroll(-1 * (event.delta // 120), "units")
 
     def on_canvas_configure(self, event):
         canvas.configure(scrollregion=canvas.bbox('all'))
+
+    # Lable frame calls   
+    def go_to_page2(self):
+        messagebox.showinfo('Same page', 'You are on the same page only')
+
+    def go_to_page3(self):
+        from Falcon_heavy import Falcon_Heavy
+        self.master.switch_frame(Falcon_Heavy)
+
+    def go_to_page4(self):
+        from Dragon import Dragon_page
+        self.master.switch_frame(Dragon_page)
+    
+    def go_to_page5(self):
+        from Starship import Starship_page
+        self.master.switch_frame(Starship_page)
+
+    def go_to_page7(self):
+        from Rideshare import Rideshare_page
+        self.master.switch_frame(Rideshare_page)
